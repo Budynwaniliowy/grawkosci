@@ -1,4 +1,4 @@
-package com.example.grawkosci2;
+package com.example.grawkosci;
 
 import android.os.Bundle;
 import android.view.View;
@@ -52,12 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void rollDice() {
         int[] rzutyKosci = new int[5];
+        int[] wystapienia = new int[6];
         int sumaRzutu = 0;
 
         for (int i = 0; i < 5; i++) {
             rzutyKosci[i] = random.nextInt(6) + 1;
-            sumaRzutu += rzutyKosci[i];
+            wystapienia[rzutyKosci[i] - 1]++;
         }
+
+        for (int i = 0; i < 6; i++) {
+            if (wystapienia[i] >= 2) {
+                sumaRzutu += (i + 1) * wystapienia[i];
+            }
+        }
+
 
         rzut1.setText(String.valueOf(rzutyKosci[0]));
         rzut2.setText(String.valueOf(rzutyKosci[1]));
