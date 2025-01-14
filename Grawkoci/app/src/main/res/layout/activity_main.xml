@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5DC"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#A52A2A"
+        android:gravity="center"
+        android:text="Gra w kości. Autor: Jakub Budziński"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:padding="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/rzut1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="9dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/dicepust"  />
+        <ImageView
+            android:id="@+id/rzut2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="9dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/dicepust"  />
+        <ImageView
+            android:id="@+id/rzut3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="9dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/dicepust" />
+        <ImageView
+            android:id="@+id/rzut4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="9dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/dicepust"  />
+        <ImageView
+            android:id="@+id/rzut5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="9dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/dicepust" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/wyniki"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Wynik tego losowania: 0"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/rzuty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Liczba rzutów: 0"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/wynikgry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Wynik gry: 0"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/rzutkoscmi"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:background="#D2691E"
+        android:text="RZUĆ KOŚĆMI"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/resetuj"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#D2691E"
+        android:text="RESETUJ WYNIK"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+</LinearLayout>
