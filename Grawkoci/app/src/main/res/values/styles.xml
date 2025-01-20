@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.DiceGame" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <style name="TitleText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name ="android:background">#A52A2A</item >
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="DiceBasic">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:src">@drawable/dicepust</item>
+        <item name="android:layout_margin">9dp</item>
+
+    </style>
+    <style name="Basic">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="Theme.DiceGame" parent="Base.Theme.DiceGame" />
+</resources>

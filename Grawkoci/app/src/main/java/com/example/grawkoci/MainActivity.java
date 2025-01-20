@@ -1,5 +1,6 @@
 package com.example.grawkoci;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,106 +8,84 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView[] rzuty;
-    private TextView wynikRzutu, liczbaRzutow, wynikGry;
-    private Button rzutKoscmiButton, resetujButton;
-    private Random random;
-    private int licznikRzutow = 0;
-    private int sumaWynikowGry = 0;
-
+    private ImageView[] diceViews = new ImageView[5];
+    private TextView currentRollScore, gameScore, rollCount;
+    private Button rollDiceButton, resetButton;
+    private int totalScore = 0;
+    private int rolls = 0;
+    private int[] pics = {R.drawable.dicepust, R.drawable.dice1, R.drawable.dice2, R.drawable.dice3, R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rzuty = new ImageView[]{
-                findViewById(R.id.rzut1),
-                findViewById(R.id.rzut2),
-                findViewById(R.id.rzut3),
-                findViewById(R.id.rzut4),
-                findViewById(R.id.rzut5)
-        };
 
-        wynikRzutu = findViewById(R.id.wyniki);
-        liczbaRzutow = findViewById(R.id.rzuty);
-        wynikGry = findViewById(R.id.wynikgry);
+        diceViews[0] = findViewById(R.id.dice1);
+        diceViews[1] = findViewById(R.id.dice2);
+        diceViews[2] = findViewById(R.id.dice3);
+        diceViews[3] = findViewById(R.id.dice4);
+        diceViews[4] = findViewById(R.id.dice5);
 
-        rzutKoscmiButton = findViewById(R.id.rzutkoscmi);
-        resetujButton = findViewById(R.id.resetuj);
+        currentRollScore = findViewById(R.id.currentRollScore);
+        gameScore = findViewById(R.id.gameScore);
+        rollCount = findViewById(R.id.rollCount);
 
-        random = new Random();
+        rollDiceButton = findViewById(R.id.rollDiceButton);
+        resetButton = findViewById(R.id.resetButton);
 
-        rzutKoscmiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rollDice();
-            }
-        });
-
-        resetujButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetGame();
-            }
-        });
+        rollDiceButton.setOnClickListener(v -> rollDice());
+        resetButton.setOnClickListener(v -> resetGame());
     }
 
     private void rollDice() {
-        int[] rzutyWartosci = new int[5];
-        int[] wystapienia = new int[6];
-        int sumaRzutu = 0;
+        Random random = new Random();
+        int[] diceResults = new int[5];
+        int[] counts = new int[6];
+
 
         for (int i = 0; i < 5; i++) {
-            rzutyWartosci[i] = random.nextInt(6) + 1;
-            wystapienia[rzutyWartosci[i] - 1]++;
+            diceResults[i] = random.nextInt(6) + 1;
+            diceViews[i].setImageResource(pics[diceResults[i]]);
+            counts[diceResults[i] - 1]++;
         }
 
+
+
+        int rollScore = 0;
         for (int i = 0; i < 6; i++) {
-            if (wystapienia[i] >= 2) {
-                sumaRzutu += (i + 1) * wystapienia[i];
+            if (counts[i] > 1) {
+                rollScore += (i + 1) * counts[i];
             }
         }
 
-        displayDiceResults(rzutyWartosci);
-
-        wynikRzutu.setText("Wynik tego losowania: " + sumaRzutu);
-
-        updateScore(sumaRzutu);
+        updateScore(rollScore);
+        currentRollScore.setText("Wynik tego losowania: " + rollScore);
         updateRollCount();
     }
 
     private void resetGame() {
-        for (ImageView rzut : rzuty) {
-            rzut.setImageResource(R.drawable.dicepust);
+        for (ImageView diceView : diceViews) {
+            diceView.setImageResource(pics[0]);
         }
-
-        wynikRzutu.setText("Wynik tego losowania: 0");
-        wynikGry.setText("Wynik gry: 0");
-        liczbaRzutow.setText("Liczba rzutów: 0");
-
-        sumaWynikowGry = 0;
-        licznikRzutow = 0;
+        totalScore = 0;
+        rolls = 0;
+        currentRollScore.setText("Wynik tego losowania: 0");
+        gameScore.setText("Wynik gry: 0");
+        rollCount.setText("Liczba rzutów: 0");
     }
 
-    private void updateScore(int nowyWynik) {
-        sumaWynikowGry += nowyWynik;
-        wynikGry.setText("Wynik gry: " + sumaWynikowGry);
+    private void updateScore(int newScore) {
+        totalScore += newScore;
+        gameScore.setText("Wynik gry: " + totalScore);
     }
 
     private void updateRollCount() {
-        licznikRzutow++;
-        liczbaRzutow.setText("Liczba rzutów: " + licznikRzutow);
-    }
-
-    private void displayDiceResults(int[] wynikiRzutu) {
-        for (int i = 0; i < 5; i++) {
-            int diceValue = wynikiRzutu[i];
-            int resID = getResources().getIdentifier("dice" + diceValue, "drawable", getPackageName());
-            rzuty[i].setImageResource(resID);
-        }
+        rolls++;
+        rollCount.setText("Liczba rzutów: " + rolls);
     }
 }
